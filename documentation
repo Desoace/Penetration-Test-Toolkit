@@ -1,0 +1,293 @@
+# Penetration Testing Toolkit Documentation
+
+## Overview
+
+The Penetration Testing Toolkit is a comprehensive Python-based security testing framework designed for ethical hacking and security assessments. This modular toolkit provides multiple security testing capabilities in a single, easy-to-use interface.
+
+## Features
+
+### 1. Port Scanner
+- Multi-threaded port scanning for fast results
+- Service detection and banner grabbing
+- Customizable port ranges and thread count
+- Common service identification
+
+### 2. Brute Force Module
+- **SSH Brute Force**: Test SSH credentials
+- **FTP Brute Force**: Test FTP login credentials
+- **HTTP Brute Force**: Test web application logins
+- Wordlist-based password testing
+- Session management for HTTP attacks
+
+### 3. Network Sniffer
+- Packet capture and analysis
+- Protocol identification (TCP/UDP)
+- Real-time traffic monitoring
+- Interface selection support
+
+### 4. Vulnerability Scanner
+- SSL/TLS vulnerability detection
+- Common file/directory discovery
+- Weak protocol identification
+- Integration with Nmap for advanced scanning
+
+### 5. Exploit Generator
+- Reverse shell payload generation (multiple languages)
+- Web shell templates (PHP, ASP, JSP)
+- Ready-to-use exploit code
+- Listener setup instructions
+
+## Installation
+
+### Requirements
+```bash
+# Core requirements
+python3
+pip3
+
+# Python packages
+pip3 install requests beautifulsoup4
+
+# Optional packages for full functionality
+pip3 install paramiko  # For SSH brute force
+pip3 install scapy     # For network sniffing
+
+# System tools (optional)
+nmap                   # For advanced vulnerability scanning
+```
+
+### Setup
+```bash
+# Clone or download the toolkit
+chmod +x pentest_toolkit.py
+
+# Run the toolkit
+python3 pentest_toolkit.py
+```
+
+## Usage Guide
+
+### Interactive Mode
+Simply run the script without arguments to enter interactive mode:
+```bash
+python3 pentest_toolkit.py
+```
+
+### Quick Scan Mode
+For a quick port scan:
+```bash
+python3 pentest_toolkit.py --quick-scan example.com
+```
+
+## Module Details
+
+### Port Scanner
+
+**Features:**
+- Scans TCP ports using socket connections
+- Identifies 20+ common services
+- Attempts banner grabbing for service verification
+- Multi-threaded for performance
+
+**Usage Example:**
+```
+Target: example.com
+Port range: 1-1000
+Threads: 100
+```
+
+**Output:**
+- Open ports with service names
+- Banner information when available
+- Scan duration and summary
+
+### Brute Force Attacks
+
+**SSH Brute Force:**
+- Uses Paramiko library
+- Supports custom wordlists
+- Handles authentication timeouts
+
+**FTP Brute Force:**
+- Native ftplib implementation
+- Anonymous login detection
+- Connection error handling
+
+**HTTP Brute Force:**
+- POST request based
+- Session persistence
+- Redirect detection for successful logins
+
+**Wordlist Format:**
+```
+password123
+admin
+letmein
+password
+12345678
+```
+
+### Network Sniffer
+
+**Requirements:**
+- Root/Administrator privileges
+- Scapy library installed
+
+**Capabilities:**
+- IP packet analysis
+- TCP/UDP port identification
+- Real-time packet display
+
+### Vulnerability Scanner
+
+**SSL/TLS Checks:**
+- Weak protocol detection (SSLv2, SSLv3, TLS 1.0)
+- Certificate information extraction
+- Cipher suite analysis
+
+**Common Vulnerabilities:**
+- Exposed configuration files (.env, .git)
+- Admin interfaces
+- Backup files and directories
+- Development/test endpoints
+
+**Nmap Integration:**
+- Automated vulnerability scripts
+- Service version detection
+- Comprehensive security assessment
+
+### Exploit Generator
+
+**Reverse Shells:**
+- Bash
+- Python
+- Perl
+- PHP
+- Ruby
+- Netcat
+- PowerShell
+
+**Web Shells:**
+- Simple command execution
+- Platform-specific implementations
+- Usage instructions included
+
+## Security Considerations
+
+### Legal Compliance
+- **ONLY** use on systems you own or have explicit permission to test
+- Obtain written authorization before testing
+- Follow responsible disclosure practices
+- Comply with local laws and regulations
+
+### Ethical Usage
+- Do not use for malicious purposes
+- Report vulnerabilities responsibly
+- Respect privacy and confidentiality
+- Document all testing activities
+
+### Best Practices
+1. Always use in isolated/lab environments first
+2. Start with non-intrusive scans
+3. Monitor target system performance
+4. Keep detailed logs of all activities
+5. Have incident response plan ready
+
+## Report Generation
+
+The toolkit automatically generates JSON reports containing:
+- Scan timestamps
+- Discovered vulnerabilities
+- Open ports and services
+- Successful authentication attempts
+- Detailed findings
+
+Report format:
+```json
+{
+    "port_scan": {
+        "target": "example.com",
+        "open_ports": [22, 80, 443],
+        "timestamp": "2024-01-01T12:00:00"
+    },
+    "brute_force": {
+        "service": "SSH",
+        "target": "example.com",
+        "credentials": ["username", "password"],
+        "timestamp": "2024-01-01T12:05:00"
+    }
+}
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**Permission Denied (Network Sniffer):**
+- Run with sudo/administrator privileges
+- Check interface permissions
+
+**Module Import Errors:**
+- Install missing dependencies
+- Check Python version (3.6+ required)
+
+**Connection Timeouts:**
+- Verify target is reachable
+- Check firewall settings
+- Adjust timeout values
+
+**Nmap Not Found:**
+- Install Nmap from official website
+- Add to system PATH
+
+## Advanced Usage
+
+### Custom Wordlists
+Create targeted wordlists based on:
+- Target organization information
+- Common password patterns
+- Leaked credential databases
+
+### Threading Optimization
+- Increase threads for faster scans
+- Decrease for stealthy operations
+- Balance based on target capacity
+
+### Extending the Toolkit
+The modular design allows easy addition of new features:
+1. Create new class inheriting base functionality
+2. Implement required methods
+3. Add to main menu system
+
+## Disclaimer
+
+This toolkit is provided for educational and authorized security testing purposes only. The author assumes no liability for misuse or damage caused by this program. Users are responsible for complying with applicable laws and obtaining proper authorization before use.
+
+## Future Enhancements
+
+- [ ] DNS enumeration module
+- [ ] Web crawler integration
+- [ ] Automated exploit selection
+- [ ] GUI interface
+- [ ] Cloud security testing
+- [ ] API fuzzing capabilities
+- [ ] Mobile app testing features
+
+## Contributing
+
+When contributing to this toolkit:
+1. Follow Python PEP-8 style guidelines
+2. Add comprehensive error handling
+3. Document new features thoroughly
+4. Include usage examples
+5. Test in multiple environments
+
+## Support
+
+For questions or issues:
+- Review documentation thoroughly
+- Check troubleshooting section
+- Ensure all dependencies are installed
+- Verify target authorization
+
+Remember: With great power comes great responsibility. Use this toolkit ethically and legally!
